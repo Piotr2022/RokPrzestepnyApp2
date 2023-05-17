@@ -15,10 +15,11 @@ namespace RokPrzestepnyZBaza.Pages
 
 
 
+        [BindProperty]
+        public int Rok { get; set; }
 
-        public int Rok;
-
-        public string? Imie;
+        [BindProperty]
+        public string? Imie { get; set; }
 
         public string? Message { get; set; }
 

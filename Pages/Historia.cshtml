@@ -5,8 +5,6 @@
 }
 <div>
     <h1 class="display-4">Historia</h1>
-    @if (@Model.lista != null)
-    {
 
         <table class="table table-bordered table-striped" style="width:100%">
             <thead>
@@ -41,40 +39,55 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var data in @Model.lista)
-            {
-                <tr>
-                     <td>
-                         @data.Id
-                    </td>
-                    <td>
-                        @data.Rok
-                    </td>
-                    <td>
-                        @data.Imie
-                    </td>
-                    <td>
-                        @data.Data
-                    </td>
-                    <td>
-                        @data.Result
-                    </td>
-                    <td>
-                        @data.loginID
-                    </td>
-                    <td>
-                        @data.Login
-                    </td>
+                @foreach (var data in @Model.lista)
+                {
+                    <tr>
+                        <td>
+                            @data.Id
+                        </td>
+                        <td>
+                            @data.Rok
+                        </td>
+                        <td>
+                            @data.Imie
+                        </td>
+                        <td>
+                            @data.Data
+                        </td>
+                        <td>
+                            @data.Result
+                        </td>
+                        <td>
+                            @data.loginID
+                        </td>
+                        <td>
+                            @data.Login
+                        </td>
                         @if (User.FindFirstValue(ClaimTypes.NameIdentifier) == @data.loginID)
                         {
                             <td>
-                                <a class="deleteButton" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
+                                <a class="btn btn-danger" asp-page="Delete" asp-route-id="@data.Id">Delete</a>
                             </td>
                         }
-                </tr>
-            }
+                    </tr>
+                }
             </tbody>
         </table>
 
-    }
+        @{
+            var prevDisabled = !Model.lista.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.lista.HasNextPage ? "disabled" : "";
+        }
+
+    <a asp-page="./History"
+       asp-route-pageIndex="@(Model.pageIndexValue - 1)"
+           class="btn btn-primary @prevDisabled">
+            Previous
+        </a>
+        <a asp-page="./History"
+       asp-route-pageIndex="@(Model.pageIndexValue + 1)"
+           class="btn btn-primary @nextDisabled">
+            Next
+        </a>
+      
 </div>
