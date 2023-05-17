@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h1 class="display-4">Wypełnij formularz</h1>
+    <form method="post">
+        <label asp-for="Rok" class="mb-3">Podaj rok urodzenia: </label>
+        <input asp-for="Rok" class="form-control" required />
+        <span asp-validation-for="Rok" class=" text-danger fw-bold"></span>
+        <br />
+        <label asp-for="Imie" class="mb-3">Podaj imię: </label>
+        <input asp-for="Imie" class="form-control" />
+        <span asp-validation-for="Imie" class=" text-danger fw-bold"></span>
+        <br />
+        <button class="btn btn-primary" type="submit">Wyślij</button>
+    </form>
+    <br />
+    <div class="alert alert-success" role="alert">
+        @Model.Message
+    </div>
+
+</div>
