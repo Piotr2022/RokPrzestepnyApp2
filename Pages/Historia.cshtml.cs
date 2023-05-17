@@ -23,10 +23,6 @@ namespace RokPrzestepnyZBaza.Pages
 
 
 
-        [BindProperty]
-        //IQueryable<WpisPrzestepnosci> lista { get; set; }
-
-
         public PaginatedList<WpisPrzestepnosci> lista { get; set; }
 
 
@@ -42,8 +38,9 @@ namespace RokPrzestepnyZBaza.Pages
 
 
             pageIndexValue = pageIndex;
+
             var pageSize = Configuration.GetValue("PageSize", 20);
-            lista = await PaginatedList<WpisPrzestepnosci>.CreateAsync(wpisyIQ.AsNoTracking(), pageIndexValue ?? 1, pageSize);
+            lista = await PaginatedList<WpisPrzestepnosci>.CreateAsync(wpisyIQ.AsNoTracking(),pageIndex ?? 1, pageSize);
         }
     }
 }
